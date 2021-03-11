@@ -61,5 +61,14 @@ module.exports = {
       if (!validPassword) {
         throw new Error('Invalid password!');
       }
-    })
+    }),
+    requireImage: check('image').custom((image, { req }) => {
+      const file = req.file;
+      if (!file) {
+          throw new Error('Please upload file');
+      }
+      return (req, res, next) => {
+          next();
+      };
+  })
 };
