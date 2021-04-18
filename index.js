@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const authRouter = require('./routes/admin/auth');
 const adminproductsRouter = require('./routes/admin/products');
@@ -9,7 +8,7 @@ const cartsRouter = require('./routes/carts');
 const app = express();
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieSession({
   keys: ['aklsjdi2213j1ns']
 }));
@@ -18,6 +17,6 @@ app.use(productsRouter);
 app.use(adminproductsRouter);
 app.use(cartsRouter);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log('Listening');
 });
